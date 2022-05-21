@@ -1,16 +1,21 @@
-//
-//  ContentView.swift
-//  ContactListSwiftUI
-//
-//  Created by Macbook on 20.05.2022.
-//
+
 
 import SwiftUI
 
 struct ContentView: View {
+    @State private var persons = Person.getPersons()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView {
+            ContactsList(persons: $persons)
+                .tabItem {
+                    Label("Contacts", systemImage: "person.3.fill")
+                }
+            SectionList(persons: $persons)
+                .tabItem {
+                    Image(systemName: "phone.fill")
+                    Text("Numbers")
+                }
+        }
     }
 }
 
